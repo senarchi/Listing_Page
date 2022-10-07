@@ -1,22 +1,33 @@
-import logo from './logo.svg';
+
 import './App.css';
 import React, { useEffect, useState } from 'react'
-// import JsonData from './frontend/components/data.json';
+import JsonData from './frontend/components/data.json';
 import ReactPaginate from 'react-paginate';
 import  axios  from 'axios';
-import { response } from 'express';
+import ModalPopup from './frontend/components/ModalPopup';
+
+
 
 function App() {
-  const [JsonData,setData]=useState("");
-  const getData=async()=>{
-    const response=await axios.get("http://localhost:5000/");
-    console.log(response);
-    // setData(response.data);
-  }
+  
+  const [apiResponse,setApiResponse]=useState("");
 
   useEffect(()=>{
-    getData()
-  },[])
+    fetch('http://localhost:5000/api/',{
+      method:'GET',
+      mode:'no-cors',
+      headers:{
+        accept:'application/json',
+      }
+    })
+    .then(res=> {res.json()})
+    .then((data)=>{
+      console.log(data)
+      setApiResponse(data)
+    })
+    .catch(err=>console.log("Failed"))
+    
+  },[]);
   const [users,setUsers]=useState(JsonData.slice(0,998));
     const [pageNumber,setPageNumber]=useState(0);
 
@@ -42,7 +53,9 @@ function App() {
   return (
     <div className='App'>
       {/* <h1>LISTING</h1> */}
+       {apiResponse}
       {displayUsers}
+      <ModalPopup/>
       <ReactPaginate
         previousLabel={"Previous"}
         nextLabel={"Next"}

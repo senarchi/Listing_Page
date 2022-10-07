@@ -1,3 +1,4 @@
+
 .App{
   display: flex;
   align-items: center;
@@ -6,6 +7,40 @@
   flex-wrap: wrap;
   width: 100vw;
 }
+/* .btn{
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 20px;
+} */
+
+.modalbtn{
+  position: absolute;
+    top: 0;
+    right: 0;
+    padding: 20px;
+    width: 200px;
+    border: 0px solid black;
+    border-radius: 0px;
+    background-color: rgba(203, 233, 69, 0.849);
+    box-shadow: 10px 10px 10px grey;
+    margin: 20px;
+    height: 50px;
+}
+
+/* .modalbutton{
+  position: absolute;
+    top: 0;
+    right: 0;
+    padding: 20px;
+  width: 200px;
+  border: 0px solid black;
+    border-radius: 0px;
+    background-color: rgba(203, 233, 69, 0.849);
+    box-shadow: 10px 10px 10px grey;
+    margin: 20px;
+    height: 50px;
+} */
 
 .user{
   border: 0px solid black;
