@@ -18,9 +18,23 @@ function ModalPopup() {
   const handleDate=(e)=>{
     setDate(e.target.value)
   }
-  const handleSubmit=(e)=>{
+  const handleSubmit=async (e)=>{
     e.preventDefault();
-    console.log(name,username,date)
+    console.log(name,username,date);
+    const URL="http://localhost:5000/user";
+    await fetch(URL,{
+      method:'POST',
+      headers:{
+        'Accept':'application/json',
+        'Content-Type':'application/json'
+      },
+      body:JSON.stringify({
+        Name:name,
+        User:username,
+        Date:date
+
+      })
+    })
   }
   return (
     <div>

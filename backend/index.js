@@ -23,11 +23,28 @@ users.find({},function(err,users){
 //     res.send('Home Page')
 // })
 
-app.get('/api',(req,res)=>{
-    users.find().then((result)=>{
+app.get('/',(req,res)=>{
+    users.find().sort({createdAt:1}).then((result)=>{
         res.send(result)
     }).catch((err)=>{
         console.log(err)
+    })
+});
+
+app.post('/user',(req,res)=>{
+    console.log("Archi")
+    console.log(req.body);
+    const user={
+        Name:req.body.Name,
+        User:req.body.User,
+        Date:req.body.Date
+    }
+    users.create(user,(err,res)=>{
+        if(err){
+            throw err
+        }
+        
+        
     })
 })
 const PORT=5000;

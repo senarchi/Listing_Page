@@ -1,7 +1,7 @@
 
 import './App.css';
 import React, { useEffect, useState } from 'react'
-import JsonData from './frontend/components/data.json';
+// import JsonData from './frontend/components/data.json';
 import ReactPaginate from 'react-paginate';
 import  axios  from 'axios';
 import ModalPopup from './frontend/components/ModalPopup';
@@ -10,25 +10,35 @@ import ModalPopup from './frontend/components/ModalPopup';
 
 function App() {
   
-  const [apiResponse,setApiResponse]=useState("");
+  const [apiResponse,setApiResponse]=useState();
+  const [users,setUsers]=useState([]);
 
   useEffect(()=>{
-    fetch('http://localhost:5000/api/',{
+    fetch('http://localhost:5000/',{
       method:'GET',
-      mode:'no-cors',
+      mode:'cors',
       headers:{
         accept:'application/json',
       }
     })
-    .then(res=> {res.json()})
+    .then(res=> res.json())
     .then((data)=>{
       console.log(data)
       setApiResponse(data)
+      
     })
-    .catch(err=>console.log("Failed"))
+    .catch(err=>console.log(err))
     
   },[]);
-  const [users,setUsers]=useState(JsonData.slice(0,998));
+
+  useEffect(()=>{
+    if(apiResponse){
+      setUsers(apiResponse.slice(0,998))
+    }
+  },[apiResponse])
+  
+  console.log()
+
     const [pageNumber,setPageNumber]=useState(0);
 
     const usersPerPage=25;
@@ -53,7 +63,7 @@ function App() {
   return (
     <div className='App'>
       {/* <h1>LISTING</h1> */}
-       {apiResponse}
+       {/* {apiResponse} */}
       {displayUsers}
       <ModalPopup/>
       <ReactPaginate
